@@ -4,6 +4,13 @@
 	<meta charset="UTF-8">
 </head>
 <body>
-	
+	<app>
+		Loading...
+	</app>
+	<script type="text/javascript" src="scripts/lib/es6-module-loader-sans-promises.js"></script>
+	<script type="text/javascript" src="scripts/lib/system.js"></script>
+	<script>
+		System.import('app');
+	</script>
 </body>
 </html>
