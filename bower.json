@@ -1,0 +1,54 @@
+{
+  "name": "Final-Project",
+  "version": "1.0.0",
+  "authors": [
+    "Leonardo Vidal <leonardo73vidal@gmail.com>"
+  ],
+  "description": "Projeto final do curso de Typescript.",
+  "moduleType": [
+    "system"
+  ],
+  "keywords": [
+    "typescript"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.4"
+  },
+  "overrides": {
+    "normalizeMulti": [
+      {
+        "dependencies": [
+          "bootstrap"
+        ],
+        "normalize": {
+          "font": [
+            "*.ttf",
+            "*.woff",
+            "*.woff2",
+            "*.eot",
+            "*.svg"
+          ],
+          "css": [
+            "*.map"
+          ]
+        }
+      }
+    ],
+    "bootstrap": {
+      "main": [
+        "dist/css/bootstrap.css",
+        "dist/css/bootstrap.css.map",
+        "dist/js/bootstrap.js",
+        "dist/fonts/*"
+      ]
+    }
+  }
+}
