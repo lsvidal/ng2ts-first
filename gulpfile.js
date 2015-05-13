@@ -9,6 +9,9 @@ var gulp = require('gulp'),
     Config = require('./gulpfile.config'),
     watch = require('gulp-watch'),
     connect = require('gulp-connect');
+var traceur = require('gulp-traceur');
+var rename = require('gulp-rename');
+var concat = require('gulp-concat');
 
 var config = new Config();
 
@@ -38,6 +41,36 @@ gulp.task('bower-dependencies', function() {
     return gulp.src(mainBowerFiles(), {base: config.bowerComponentsPath})
         .pipe(bowerNormalizer({bowerJson: './bower.json'}))
         .pipe(gulp.dest(config.distScriptsPath))
+});
+
+gulp.task('npm-dependencies', function() {
+    console.log(config.distLibsPath);
+    var depFiles = [
+        config.nodeModulesPath + 'systemjs/dist/system.js*',
+        config.nodeModulesPath + 'es6-module-loader/dist/es6-module-loader.js*',
+        config.nodeModulesPath + 'es6-module-loader/dist/es6-module-loader-sans-promises.js*'
+    ];
+    console.log(depFiles);
+    return gulp.src(depFiles)
+            .pipe(gulp.dest(config.distLibsPath));
+});
+
+gulp.task('angular2', function() {
+
+    //transpile & concat
+    return gulp.src(
+            [
+                'node_modules/angular2/es6/prod/*.es6',
+                'node_modules/angular2/es6/prod/src/**/*.es6'
+            ],
+            {base: 'node_modules/angular2/es6/prod'})
+        .pipe(rename(function(path) {
+            path.dirname = 'angular2/' + path.dirname; //this is not ideal... but not sure how to change angular's file structure
+            path.extname = ''; //hack, see: https://github.com/sindresorhus/gulp-traceur/issues/54
+        }))
+        .pipe(traceur({modules: 'instantiate', moduleName: true}))
+        .pipe(concat('angular2.js'))
+        .pipe(gulp.dest(config.distLibsPath));
 });
 
 /**
@@ -88,7 +121,6 @@ gulp.task('compile-ts', ['gen-ts-refs'], function () {
 });
 
 gulp.task('process-html', function() {
-    console.log(config.srcHtml);
     gulp.src(config.srcHtml)
         .pipe(gulp.dest(config.distPath));
 });
@@ -121,4 +153,4 @@ gulp.task('clean', function() {
     });
 });
 
-gulp.task('default', ['bower-dependencies', 'process-html', 'process-css', 'compile-ts', 'watch', 'livereload']);
+gulp.task('default', ['bower-dependencies', 'npm-dependencies', 'process-html', 'process-css', 'compile-ts', 'watch', 'livereload']);
