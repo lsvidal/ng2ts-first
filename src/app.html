@@ -2,15 +2,21 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="styles/app.css">
 </head>
 <body>
 	<app>
 		Loading...
 	</app>
-	<script type="text/javascript" src="scripts/lib/es6-module-loader-sans-promises.js"></script>
-	<script type="text/javascript" src="scripts/lib/system.js"></script>
+	<script type="text/javascript" src="scripts/traceur-runtime/js/traceur-runtime.js"></script>
+	<script type="text/javascript" src="scripts/es6-module-loader/js/es6-module-loader-sans-promises.js"></script>
+	<script type="text/javascript" src="scripts/systemjs/js/system.js"></script>
 	<script>
-		System.import('app');
+		System.paths = {
+			'*': 'scripts/*.js'
+		};
+		System.import('app')
+			.catch(console.log.bind(console)); // Redirect error messages to console
 	</script>
 </body>
 </html>
