@@ -54,20 +54,17 @@ gulp.task('bower-dependencies', function() {
 
 gulp.task('angular2', function() {
 
+    var src = config.nodeModulesPath + 'angular2/es6/dev';
+
     //transpile & concat
-    return gulp.src(
-            [
-                'node_modules/angular2/es6/prod/*.es6',
-                'node_modules/angular2/es6/prod/src/**/*.es6'
-            ],
-            {base: 'node_modules/angular2/es6/prod'})
+    return gulp.src([ src + '/*.es6', src + '/src/**/*.es6'], {base: src})
         .pipe(rename(function(path) {
             path.dirname = 'angular2/' + path.dirname; //this is not ideal... but not sure how to change angular's file structure
             path.extname = ''; //hack, see: https://github.com/sindresorhus/gulp-traceur/issues/54
         }))
         .pipe(traceur({modules: 'instantiate', moduleName: true}))
         .pipe(concat('angular2.js'))
-        .pipe(gulp.dest(config.distLibsPath));
+        .pipe(gulp.dest(config.distScriptsPath + 'angular2/js'));
 });
 
 /**
@@ -150,4 +147,6 @@ gulp.task('clean', function() {
     });
 });
 
-gulp.task('default', ['bower-dependencies', 'process-html', 'process-css', 'compile-ts', 'watch', 'livereload']);
+gulp.task('static-assets', ['angular2', 'bower-dependencies']);
+
+gulp.task('default', ['static-assets', 'process-html', 'process-css', 'compile-ts', 'watch', 'livereload']);

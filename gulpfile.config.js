@@ -9,14 +9,13 @@ var GulpConfig = (function () {
 
         this.distPath = './dist/';
         this.distAllFiles = this.distPath + '**/*';
-        this.distScriptsPath = this.distPath + 'scripts';
-        this.distCssPath = this.distPath + 'styles';
-        this.distLibsPath = this.distScriptsPath + '/lib';
+        this.distScriptsPath = this.distPath + 'scripts/';
+        this.distCssPath = this.distPath + 'styles/';        
         this.typings = './tools/typings/';
         this.libraryTypeScriptDefinitions =  this.typings + 'lib/**/*.ts';
         this.appTypeScriptReferences = this.typings + 'typescriptApp.d.ts';
 
-        this.bowerComponentsPath = './bower_components';
+        this.bowerComponentsPath = './bower_components/';
         this.nodeModulesPath = './node_modules/';
     }
     return GulpConfig;

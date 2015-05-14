@@ -26,11 +26,6 @@
     "systemjs": "systemjs/systemjs#~0.16.11"
   },
   "overrides": {
-    "*": {      
-      "normalize": {
-        ".": ["*.js", "*.map"]
-      }
-    },
     "bootstrap": {
       "main": [
         "dist/css/bootstrap.css",
@@ -46,9 +41,7 @@
             "*.eot",
             "*.svg"
           ],
-          "css": [
-            "*.css.map"
-          ]
+          "css": "*.css.map"
         }
     },
     "systemjs": {
