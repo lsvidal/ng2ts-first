@@ -20,15 +20,25 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "~3.3.4"
+    "bootstrap": "~3.3.4",
+    "traceur-runtime": "~0.0.89",
+    "es6-module-loader": "~0.16.6",
+    "systemjs": "systemjs/systemjs#~0.16.11"
   },
   "overrides": {
-    "normalizeMulti": [
-      {
-        "dependencies": [
-          "bootstrap"
-        ],
-        "normalize": {
+    "*": {      
+      "normalize": {
+        ".": ["*.js", "*.map"]
+      }
+    },
+    "bootstrap": {
+      "main": [
+        "dist/css/bootstrap.css",
+        "dist/css/bootstrap.css.map",
+        "dist/js/bootstrap.js",
+        "dist/fonts/*"
+      ],
+      "normalize": {
           "font": [
             "*.ttf",
             "*.woff",
@@ -37,18 +47,24 @@
             "*.svg"
           ],
           "css": [
-            "*.map"
+            "*.css.map"
           ]
         }
-      }
-    ],
-    "bootstrap": {
+    },
+    "systemjs": {
       "main": [
-        "dist/css/bootstrap.css",
-        "dist/css/bootstrap.css.map",
-        "dist/js/bootstrap.js",
-        "dist/fonts/*"
-      ]
+        "dist/system.js",
+        "dist/system.js.map"
+      ],
+      "normalize": {
+        "js": "*.map"
+      }
+    },
+    "es6-module-loader": {
+      "main": "dist/es6-module-loader-sans-promises.js*",
+      "normalize": {
+        "js": "*.map"
+      }
     }
   }
 }

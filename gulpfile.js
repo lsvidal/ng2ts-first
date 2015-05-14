@@ -37,22 +37,19 @@ gulp.task('bower-dependencies', function() {
    
     var mainBowerFiles  = require('main-bower-files');
     var bowerNormalizer = require('gulp-bower-normalize');
+    var flatten = require('gulp-flatten');
 
     return gulp.src(mainBowerFiles(), {base: config.bowerComponentsPath})
         .pipe(bowerNormalizer({bowerJson: './bower.json'}))
+        //.pipe(flatten())
+        /*
+        .pipe(rename(function(path) {
+            if (path.extname === '.js') {
+                path.dirname = '';
+            }
+        }))
+*/
         .pipe(gulp.dest(config.distScriptsPath))
-});
-
-gulp.task('npm-dependencies', function() {
-    console.log(config.distLibsPath);
-    var depFiles = [
-        config.nodeModulesPath + 'systemjs/dist/system.js*',
-        config.nodeModulesPath + 'es6-module-loader/dist/es6-module-loader.js*',
-        config.nodeModulesPath + 'es6-module-loader/dist/es6-module-loader-sans-promises.js*'
-    ];
-    console.log(depFiles);
-    return gulp.src(depFiles)
-            .pipe(gulp.dest(config.distLibsPath));
 });
 
 gulp.task('angular2', function() {
@@ -153,4 +150,4 @@ gulp.task('clean', function() {
     });
 });
 
-gulp.task('default', ['bower-dependencies', 'npm-dependencies', 'process-html', 'process-css', 'compile-ts', 'watch', 'livereload']);
+gulp.task('default', ['bower-dependencies', 'process-html', 'process-css', 'compile-ts', 'watch', 'livereload']);
