@@ -24,7 +24,8 @@
     "traceur-runtime": "~0.0.89",
     "es6-module-loader": "~0.16.6",
     "systemjs": "systemjs/systemjs#~0.16.11",
-    "rxjs": "~2.5.2"
+    "rxjs": "~2.5.2",
+    "reflect-metadata": "~0.1.0"
   },
   "overrides": {
     "bootstrap": {

@@ -17,7 +17,7 @@ var GulpConfig = (function () {
             allFiles: dist + '**/*',
             pathScripts: dist + 'scripts/',
             pathCss: dist + 'styles/',
-            pathLibs: dist + 'libs/'
+            pathLibs: dist + 'scripts/'
         };
 
         this.typings = './tools/typings/';

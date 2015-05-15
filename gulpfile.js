@@ -59,19 +59,28 @@ gulp.task('bower-dependencies', function() {
         .pipe(gulp.dest(config.dist.pathLibs));
 });
 
+gulp.task('angular2-dependencies', function() {
+    var libs = [
+        config.nodeModules + 'angular2/node_modules/zone.js/zone.js',
+        config.nodeModules + 'angular2/node_modules/zone.js/long-stack-trace-zone.js'
+    ];
+    return gulp.src(libs)
+            .pipe(gulp.dest(config.dist.pathLibs));
+});
+
 gulp.task('angular2', function() {
 
-    var src = config.nodeModules + 'angular2/es6/dev';
+  var buildConfig = {
+    paths: {
+      "angular2/*": "./node_modules/angular2/es6/prod/*.es6",
+      "rx": "./node_modules/angular2/node_modules/rx/dist/rx.js"
+    }
+  };
 
-    //transpile & concat
-    return gulp.src([ src + '/*.es6', src + '/src/**/*.es6'], {base: src})
-        .pipe(rename(function(path) {
-            path.dirname = 'angular2/' + path.dirname; //this is not ideal... but not sure how to change angular's file structure
-            path.extname = ''; //hack, see: https://github.com/sindresorhus/gulp-traceur/issues/54
-        }))
-        .pipe(traceur({modules: 'instantiate', moduleName: true}))
-        .pipe(concat('angular2.js'))
-        .pipe(gulp.dest(config.dist.pathLibs));
+  var Builder = require('systemjs-builder');
+  var builder = new Builder(buildConfig);
+
+  return builder.build('angular2/angular2', config.dist.pathLibs + 'angular2.js', {});
 });
 
 /**
@@ -154,6 +163,6 @@ gulp.task('clean', function() {
     });
 });
 
-gulp.task('static-assets', ['angular2', 'bower-dependencies']);
+gulp.task('static-assets', ['angular2', 'angular2-dependencies', 'bower-dependencies']);
 
 gulp.task('default', ['static-assets', 'process-html', 'process-css', 'compile-ts', 'watch', 'livereload']);

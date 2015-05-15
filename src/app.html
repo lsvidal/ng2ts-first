@@ -8,12 +8,16 @@
 	<app>
 		Loading...
 	</app>
-	<script type="text/javascript" src="scripts/traceur-runtime/js/traceur-runtime.js"></script>
-	<script type="text/javascript" src="scripts/es6-module-loader/js/es6-module-loader-sans-promises.js"></script>
-	<script type="text/javascript" src="scripts/systemjs/js/system.js"></script>
+	<script type="text/javascript" src="/scripts/traceur-runtime.js"></script>
+	<script type="text/javascript" src="/scripts/es6-module-loader-sans-promises.js"></script>
+	<script type="text/javascript" src="/scripts/system.js"></script>
+	<script type="text/javascript" src="/scripts/zone.js"></script>
+	<script type="text/javascript" src="/scripts/long-stack-trace-zone.js"></script>
+	<script type="text/javascript" src="/scripts/Reflect.js"></script>
+	<script type="text/javascript"></script>
 	<script>
 		System.baseURL = '/scripts/';
-		System.paths['angular2/angular2'] = 'angular2/js/angular2.js';
+		System.paths['angular2/angular2'] = '/scripts/angular2.js';
 		System.import('app')
 			.catch(console.log.bind(console)); // Redirect error messages to console
 	</script>

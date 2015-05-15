@@ -6,7 +6,7 @@ import {Component, View, bootstrap} from 'angular2/angular2';
   selector: 'app'
 })
 @View({
-  inline: '<div>{{msg}}</div>'
+  template: '<div>{{msg}}</div>'
 })
 export class App {
   msg: string;
