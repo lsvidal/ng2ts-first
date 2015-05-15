@@ -53,7 +53,7 @@
       ]
     },
     "es6-module-loader": {
-      "main": "dist/es6-module-loader-sans-promises.js*"
+      "main": "dist/es6-module-loader.js*"
     }
   }
 }
