@@ -8,7 +8,6 @@ var gulp = require('gulp'),
     Config = require('./gulpfile.config'),
     watch = require('gulp-watch'),
     connect = require('gulp-connect');
-var traceur = require('gulp-traceur');
 var rename = require('gulp-rename');
 var concat = require('gulp-concat');
 
