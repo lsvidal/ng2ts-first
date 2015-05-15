@@ -87,6 +87,7 @@ gulp.task('angular2', function() {
 gulp.task('gen-ts-refs', function () {
     var sources = gulp.src([config.src.ts], {read: false});
     return gulp.src(config.dtsApp)
+            .pipe(debug({title: 'd.ts generation:'}))
             .pipe(inject(sources, {
                 starttag: '//{',
                 endtag: '//}',
@@ -106,21 +107,22 @@ gulp.task('compile-ts', ['gen-ts-refs'], function () {
                          config.dtsApp];     //reference to app.d.ts files
 
     var tsResult = gulp.src(sourceTsFiles)
-                       .pipe(sourcemaps.init())
-                       .pipe(tsc({
-                           target: 'ES5',
-                           module: 'system',
-                           declarationFiles: false,
-                           noExternalResolve: true,
-                           noLib: false,
-                           noImplicitAny: true,
-                           emitDecoratorMetadata: true,
-                           declaration: false,
-                           sourceMap: true,                       
-                           listFiles: true,
-                           typescript: require('typescript') // Used to exchange the default version of Typescript compiler
+                      .pipe(debug({title: 'ts compiled:'}))
+                      .pipe(sourcemaps.init())
+                      .pipe(tsc({
+                          target: 'ES5',
+                          module: 'system',
+                          declarationFiles: false,
+                          noExternalResolve: true,
+                          noLib: false,
+                          noImplicitAny: true,
+                          emitDecoratorMetadata: true,
+                          declaration: false,
+                          sourceMap: true,
+                          listFiles: true,
+                          typescript: require('typescript') // Used to exchange the default version of Typescript compiler
                                                              // by the version set in devDependnecies in package.json
-                       }));
+                      }));
 
         tsResult.dts.pipe(gulp.dest(config.dist.pathScripts));
         return tsResult.js
