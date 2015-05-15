@@ -78,7 +78,7 @@ gulp.task('angular2', function() {
   var Builder = require('systemjs-builder');
   var builder = new Builder(buildConfig);
 
-  return builder.build('angular2/angular2', config.dist.pathLibs + 'angular2.js', {});
+  return builder.build('angular2/angular2', config.dist.pathLibs + 'angular2.js', {/*minify: true,*/ sourceMaps: true});
 });
 
 /**
