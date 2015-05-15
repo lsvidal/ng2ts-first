@@ -4,12 +4,12 @@ var gulp = require('gulp'),
     debug = require('gulp-debug'),
     inject = require('gulp-inject'),
     tsc = require('gulp-typescript'),
-    sourcemaps = require('gulp-sourcemaps'),    
-    Config = require('./gulpfile.config'),
+    sourcemaps = require('gulp-sourcemaps'),        
     watch = require('gulp-watch'),
-    connect = require('gulp-connect');
-var rename = require('gulp-rename');
-var concat = require('gulp-concat');
+    connect = require('gulp-connect'),
+    rename = require('gulp-rename');
+
+var Config = require('./gulpfile.config');
 
 var config = new Config();
 
