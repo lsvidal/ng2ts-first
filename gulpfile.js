@@ -4,8 +4,7 @@ var gulp = require('gulp'),
     debug = require('gulp-debug'),
     inject = require('gulp-inject'),
     tsc = require('gulp-typescript'),
-    sourcemaps = require('gulp-sourcemaps'),
-    rimraf = require('gulp-rimraf'),
+    sourcemaps = require('gulp-sourcemaps'),    
     Config = require('./gulpfile.config'),
     watch = require('gulp-watch'),
     connect = require('gulp-connect');
@@ -151,15 +150,10 @@ gulp.task('watch', function() {
  */
 gulp.task('clean', function() {
     var del = require('del');
-    var mkdirp = require('mkdirp');
-    del([
-        config.dist.path
-    ]);
-    mkdirp(config.dist.path, {mode: '0755'}, function(err, made) {
-        // err é uma possível condição de erro
-        // made é o caminho do último diretório criado com sucesso
-        if (err) console.error(err)
-        else console.log('Scripts dir created: ' + made);
+    del([config.dist.path], function (err) {
+      if (err) {
+        console.error('Failed to delete ' + config.dist.path + ' due to ' + err);
+      }
     });
 });
 
