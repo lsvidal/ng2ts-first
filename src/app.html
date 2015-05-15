@@ -12,9 +12,8 @@
 	<script type="text/javascript" src="scripts/es6-module-loader/js/es6-module-loader-sans-promises.js"></script>
 	<script type="text/javascript" src="scripts/systemjs/js/system.js"></script>
 	<script>
-		System.paths = {
-			'*': 'scripts/*.js'
-		};
+		System.baseURL = '/scripts/';
+		System.paths['angular2/angular2'] = 'angular2/js/angular2.js';
 		System.import('app')
 			.catch(console.log.bind(console)); // Redirect error messages to console
 	</script>

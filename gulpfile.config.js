@@ -1,22 +1,31 @@
 'use strict';
 var GulpConfig = (function () {
+
     function GulpConfig() {
-        
-        this.srcPath = './src/';
-        this.srcTs = this.srcPath + 'scripts/**/*.ts';
-        this.srcCss = this.srcPath + 'styles/**/*.css';
-        this.srcHtml = this.srcPath + '**/*.html';
 
-        this.distPath = './dist/';
-        this.distAllFiles = this.distPath + '**/*';
-        this.distScriptsPath = this.distPath + 'scripts/';
-        this.distCssPath = this.distPath + 'styles/';        
+        var src =  './src/';
+        var dist = './dist/';
+
+        this.src = {
+            path: src,
+            ts: src + 'scripts/**/*.ts',
+            css: src + 'styles/**/*.css',
+            html: src + '**/*.html'
+        };
+        this.dist = {
+            path: dist,
+            allFiles: dist + '**/*',
+            pathScripts: dist + 'scripts/',
+            pathCss: dist + 'styles/',
+            pathLibs: dist + 'libs/'
+        };
+
         this.typings = './tools/typings/';
-        this.libraryTypeScriptDefinitions =  this.typings + 'lib/**/*.ts';
-        this.appTypeScriptReferences = this.typings + 'typescriptApp.d.ts';
+        this.dtsLibs =  this.typings + 'lib/**/*.ts';
+        this.dtsApp = this.typings + 'App.d.ts';
 
-        this.bowerComponentsPath = './bower_components/';
-        this.nodeModulesPath = './node_modules/';
+        this.bowerComponents = './bower_components/';
+        this.nodeModules = './node_modules/';
     }
     return GulpConfig;
 })();
